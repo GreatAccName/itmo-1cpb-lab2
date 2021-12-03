@@ -1,0 +1,281 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Italic;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww6560\viewh13320\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 lab2 var: 3109\
+\
+
+\f1\b EQUATION
+\f0\b0 \
+
+\f1\b --------------------
+\f0\b0 \
+res = v1 - (v3 | v0)\
+\
+
+\f1\b PROGRAMM\
+--------------------
+\f0\b0 \
+097	CLA	0200	0 -> AC\
+098	OR	30A3	AC | M -> AC\
+099	OR	30A0	AC | M -> AC\
+09A	ST	E0A2	AC -> M\
+09B	LD	A0A1	M -> AC\
+09C	SUB	60A2	AC - M -> AC\
+09D	ST	E09F	AC -> M\
+09E	HLT	0100	Halt\
+09F	-	0200	res\
+0A0	-	0200	v0\
+0A1	-	0200	v1\
+0A2	-	30A0	v2\
+0A3	-	0200	v3\
+\
+
+\f1\b PROGRAM EXECUTION BY TICK
+\f0\b0 \
+
+\f1\b --------------------
+\f0\b0 \
+
+\f1\b Start
+\f0\b0 \
+NZVC(0100)\
+PS(004)\
+Control Unit: Operator panel\
+0 -> AC,BR,DR,CR,SP,AR\
+	PS -> CU: Operator panel\
+	CU: Execution\
+	PS -> CU: Interrupt\
+	-\
+	PS -> Control Unit\
+\
+
+\f1\b 097	CLA	0200	0 -> AC\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i\b0 \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (097)-> BR; IP (097)-> AR\}\
+\{BR (098)-> IP; M(AR) (0200)-> DR\}\
+DR (0200)-> CR\
+	CR -> CU: IF (3 free-taps)\
+	CR -> CU: EX (4 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+(0000)-> AC\
+	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 098	OR	30A3	AC | M -> AC
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (098)-> BR; IP (098)-> AR\}\
+\{BR (099)-> IP; M(AR) (30A3)-> DR\}\
+DR (30A3)-> CR\
+	CR -> CU: IF (3 free-taps)\
+	CR -> CU: OF (0 free-taps)\
+
+\f2\i Operand Fetch:
+\f0\i0 \
+DR (0A3)-> AR\
+M(AR) (0200)-> DR\
+	CR -> CU: EX (2 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+AC(0000) | DR(0200) -> BR(FDFF)\
+BR (0200)-> AC\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 	PS(000)\
+	NZVC(0000)\
+
+\f0\b0 	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+
+\f1\b 099	OR	30A0	AC | M -> AC
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (099)-> BR; IP (099)-> AR\}\
+\{BR (09A)-> IP; M(AR) (30A0)-> DR\}\
+DR (30A0)-> CR\
+	CR -> CU: IF (3 free-taps)\
+	CR -> CU: OF (0 free-taps)\
+
+\f2\i Operand Fetch:
+\f0\i0 \
+DR (0A0)-> AR\
+M(AR) (0200)-> DR\
+	CR -> CU: EX (2 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+AC(0200) | DR(0200) -> BR(FDFF)\
+BR (0200)-> AC
+\f1\b \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f0\b0 \cf0 	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+
+\f1\b 09A	ST	E0A2	AC -> M
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (09A)-> BR; IP (09A)-> AR\}\
+\{BR (09B)-> IP; M(AR) (E0A2)-> DR\}\
+DR (E0A2)-> CR\
+	CR -> CU: IF (4 free-taps)\
+	CR -> CU: OF (1 free-taps)\
+	CR -> CU: EX (0 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+DR (0A2)-> AR\
+AC (0200)-> DR\
+DR (0200) -> M(AR)\
+	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 09B	LD	A0A1	M -> AC
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (09B)-> BR; IP (09B)-> AR\}\
+\{BR (09C)-> IP; M(AR) (A0A1)-> DR\}\
+DR (A0A1)-> CR\
+	CR -> CU: IF (2 free-taps)\
+	CR -> CU: OF (1 free-taps)\
+
+\f2\i Operand Fetch:
+\f0\i0 \
+DR (0A1)-> AR\
+M(AR) (0200)-> DR\
+	CR -> CU: EX (2 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+DR (0200)-> AC\
+	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 09C	SUB	60A2	AC - M -> AC
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (09C)-> BR; IP (09C)-> AR\}\
+\{BR (09D)-> IP; M(AR) (60A2)-> DR\}\
+DR (60A2)-> CR\
+	CR -> CU: IF (2 free-taps)\
+	CR -> CU: OF (0 free-taps)\
+
+\f2\i Operand Fetch:
+\f0\i0 \
+DR (0A2)-> AR\
+M(AR) (0200)-> DR\
+	CR -> CU: EX (3 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+AC(0200) - DR(0200) -> AC(0000)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 	PS(005)\
+	NZVC(0101)\
+
+\f0\b0 	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+
+\f1\b 09D	ST	E09F	AC -> M
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (09D)-> BR; IP (09D)-> AR\}\
+\{BR (09E)-> IP; M(AR) (E09F)-> DR\}\
+DR (E09F)-> CR\
+	CR -> CU: IF (4 free-taps)\
+	CR -> CU: OF (1 free-taps)\
+	CR -> CU: EX (0 free-taps)\
+
+\f2\i Execution:
+\f0\i0 \
+DR (09F)-> AR\
+AC (0000)-> DR\
+DR (0000)-> M(AR)\
+	PS -> CU: EX\
+	PS -> CU: Interrupt\
+	-\
+	PS -> CU\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 09E	HLT	0100	Halt
+\f0\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f2\i \cf0 Instruction Fetch:
+\f0\i0 \
+\{IP (09E)-> BR; IP (09E)-> AR\}\
+\{BR (09F)-> IP; M(AR) (0100)-> DR\}\
+DR (0100)-> CR\
+	CR -> CU: IF (2 free-taps)\
+	CR -> CU: EX (3 free-taps)\
+	PS -> CU: EX\
+	-\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7388\pardirnatural\partightenfactor0
+
+\f1\b \cf0 SHORT PROGRAMM\
+--------------------
+\f0\b0 \
+020	OR	3029	AC | v3 -> AC\
+021	OR	3027	AC | v0 -> AC\
+022	SUB	6028	AC - v1 -> AC\
+023	NEG	0780	^AC + 1 -> AC\
+024	ST	E026	AC -> res\
+025	HLT	0100	Halt\
+026	-	0200	res\
+027	-	0200	v0\
+028	-	0200	v1\
+029	-	0200	v3\
+}
